@@ -28,6 +28,7 @@ const maskStyle: CSSProperties = {
 
 export default function WaveNavbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     if (!menuOpen) {
@@ -54,21 +55,41 @@ export default function WaveNavbar() {
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 16);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="relative isolate z-50">
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[230px] overflow-hidden">
+    <header
+      className={clsx(
+        "relative isolate sticky top-0 z-50 w-full transition-shadow duration-300",
+        isScrolled && "shadow-[0_20px_45px_-30px_rgba(15,23,42,0.45)]"
+      )}
+    >
+      <div className="pointer-events-none absolute inset-x-0 -top-px -z-10 h-[240px] overflow-hidden sm:h-[260px] lg:h-[280px]">
         <div className="absolute inset-0" style={maskStyle}>
           <div className="h-full w-full bg-[linear-gradient(90deg,#5a75ff_0%,#6d8fff_50%,#5a75ff_100%)] dark:bg-[linear-gradient(90deg,#150a70_0%,#241594_50%,#070237_100%)]" />
         </div>
-        <div className="absolute inset-x-0 top-0 h-[230px] bg-[linear-gradient(180deg,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0)_60%)] dark:bg-[linear-gradient(180deg,rgba(18,8,77,0.45)_0%,rgba(4,2,36,0)_70%)]" />
+        <div className="absolute inset-x-0 top-0 h-[240px] bg-[linear-gradient(180deg,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0)_60%)] dark:bg-[linear-gradient(180deg,rgba(18,8,77,0.45)_0%,rgba(4,2,36,0)_70%)] sm:h-[260px] lg:h-[280px]" />
       </div>
 
-      <div className="w-full px-4 pb-14 pt-5 sm:px-6 lg:px-10">
+      <div
+        className={clsx(
+          "mx-auto w-full max-w-6xl px-4 transition-[padding] duration-300 sm:px-6 lg:px-10",
+          isScrolled ? "pb-10 pt-3" : "pb-14 pt-5"
+        )}
+      >
         <div className="flex items-center justify-between text-white sm:hidden">
           <button
             type="button"
             aria-label="Buka menu navigasi"
-            className="rounded-full border border-white/40 bg-white/10 p-2 transition hover:bg-white/20"
+            className="rounded-full border border-white/40 bg-white/10 p-2 transition hover:bg-white/20 dark:border-white/25"
             onClick={() => setMenuOpen(true)}
           >
             <Menu className="h-5 w-5" />
@@ -78,21 +99,21 @@ export default function WaveNavbar() {
             href="#top"
             className="flex flex-col items-center text-sm font-semibold uppercase tracking-[0.32em]"
           >
-            <span className="text-[0.65rem] text-white/70">Twibbonize</span>
-            <span className="text-base tracking-tight normal-case">Snowy Studio</span>
+            <span className="text-[0.65rem] text-white/70 dark:text-white/60">Twibbonize</span>
+            <span className="text-base tracking-tight normal-case text-white dark:text-white">Snowy Studio</span>
           </Link>
 
           <div className="flex items-center gap-2">
             <button
               type="button"
               aria-label="Cari konten"
-              className="rounded-full border border-white/40 bg-white/10 p-2 transition hover:bg-white/20"
+              className="rounded-full border border-white/40 bg-white/10 p-2 transition hover:bg-white/20 dark:border-white/25"
             >
               <Search className="h-5 w-5" />
             </button>
             <Link
               href="#signin"
-              className="rounded-full border border-white/40 px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-white/15"
+              className="rounded-full border border-white/40 px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-white/15 dark:border-white/30"
             >
               Masuk
             </Link>
@@ -102,8 +123,8 @@ export default function WaveNavbar() {
         <div className="mt-5 hidden items-center justify-between text-white sm:flex">
           <div className="flex items-center gap-10">
             <Link href="#top" className="flex flex-col text-sm font-semibold leading-none uppercase tracking-[0.32em]">
-              <span className="text-[0.7rem] text-white/70">Twibbonize</span>
-              <span className="text-2xl leading-tight normal-case">Snowy Studio</span>
+              <span className="text-[0.7rem] text-white/70 dark:text-white/60">Twibbonize</span>
+              <span className="text-2xl leading-tight normal-case text-white dark:text-white">Snowy Studio</span>
             </Link>
 
             <nav aria-label="Navigasi utama" className="flex items-center gap-1">
@@ -123,13 +144,13 @@ export default function WaveNavbar() {
             <button
               type="button"
               aria-label="Cari konten"
-              className="rounded-full border border-white/40 bg-white/10 p-2 transition hover:bg-white/20"
+              className="rounded-full border border-white/40 bg-white/10 p-2 transition hover:bg-white/20 dark:border-white/25"
             >
               <Search className="h-5 w-5" />
             </button>
             <Link
               href="#signin"
-              className="rounded-full border border-white/55 px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/12"
+              className="rounded-full border border-white/55 px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/12 dark:border-white/30"
             >
               Masuk
             </Link>
@@ -159,14 +180,14 @@ export default function WaveNavbar() {
       >
         <div
           className={clsx(
-            "ml-auto flex h-full max-w-xs flex-col rounded-[30px] border border-white/25 bg-white/95 text-[#1c2440] shadow-[0_40px_120px_-60px_rgba(9,18,54,0.8)] transition-transform dark:border-white/10 dark:bg-[#0e133f] dark:text-white",
+            "ml-auto flex h-full max-w-sm flex-col rounded-[32px] border border-white/25 bg-white/95 text-[#1c2440] shadow-[0_40px_120px_-60px_rgba(9,18,54,0.8)] transition-transform dark:border-white/10 dark:bg-[#0e133f] dark:text-white",
             menuOpen ? "translate-x-0" : "translate-x-full",
           )}
         >
           <div className="flex items-center justify-between border-b border-slate-200/60 px-6 pb-4 pt-6 dark:border-white/10">
             <Link href="#top" className="flex flex-col text-sm font-semibold leading-none uppercase tracking-[0.32em]">
               <span className="text-[0.65rem] text-black/60 dark:text-white/60">Twibbonize</span>
-              <span className="text-lg leading-tight normal-case">Snowy Studio</span>
+              <span className="text-lg leading-tight normal-case text-[#1c2440] dark:text-white">Snowy Studio</span>
             </Link>
             <button
               type="button"
