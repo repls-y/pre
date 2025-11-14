@@ -59,6 +59,15 @@ export default function Home() {
             Documentation
           </a>
         </div>
+        <section className="relative mt-16 w-full overflow-hidden rounded-3xl bg-indigo-500 px-8 py-14 text-white shadow-xl">
+          <h2 className="text-2xl font-semibold tracking-tight">Wave separator inspired by Arc</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-indigo-100">
+            The decorative wave below uses the same layering approach Arc employs: a slim container
+            with an ::after pseudo-element that repeats an SVG along the x-axis. Drop the component at
+            the edge of any section to create a fluid transition into the following block.
+          </p>
+          <div className="arc-wave" aria-hidden="true" />
+        </section>
       </main>
     </div>
   );
