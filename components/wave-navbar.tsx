@@ -82,7 +82,7 @@ export default function WaveNavbar() {
       <div
         className={clsx(
           "mx-auto w-full max-w-6xl px-4 transition-[padding] duration-300 sm:px-6 lg:px-10",
-          isScrolled ? "pb-10 pt-3" : "pb-14 pt-5"
+          isScrolled ? "pb-9 pt-2" : "pb-12 pt-2"
         )}
       >
         <div className="flex items-center justify-between text-white sm:hidden">
@@ -120,7 +120,7 @@ export default function WaveNavbar() {
           </div>
         </div>
 
-        <div className="mt-5 hidden items-center justify-between text-white sm:flex">
+        <div className="hidden items-center justify-between text-white sm:flex">
           <div className="flex items-center gap-10">
             <Link href="#top" className="flex flex-col text-sm font-semibold leading-none uppercase tracking-[0.32em]">
               <span className="text-[0.7rem] text-white/70 dark:text-white/60">Twibbonize</span>
