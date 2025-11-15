@@ -72,7 +72,7 @@ export default function WaveNavbar() {
         isScrolled && "shadow-[0_20px_45px_-30px_rgba(15,23,42,0.45)]"
       )}
     >
-      <div className="pointer-events-none absolute inset-x-0 -top-px -z-10 h-[240px] overflow-hidden sm:h-[260px] lg:h-[280px]">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[240px] overflow-hidden sm:h-[260px] lg:h-[280px]">
         <div className="absolute inset-0" style={maskStyle}>
           <div className="h-full w-full bg-[linear-gradient(90deg,#5a75ff_0%,#6d8fff_50%,#5a75ff_100%)] dark:bg-[linear-gradient(90deg,#150a70_0%,#241594_50%,#070237_100%)]" />
         </div>
